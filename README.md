@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# cliente-controller-testes
-
-Branch criada para testes seculares, a partir do projeto principal 
-=======
 # cliente-controller
 
 Um cliente meu precisa de uma aplicação para resolver um pequeno problema em meu negócio.
@@ -26,4 +21,4 @@ O sistema deve conter um swagger para a chamada dos endpoints.
 O sistema deve ser feito utilizando .Net Core 3.1, .Net 5, 6 ou 7.
 O sistema deve ter testes das regras de negócio informadas acima.
 O sistema deve ser entregue em um repositório seu do Git.
->>>>>>> d333b45e90022a6f9caa58c8096761672c829ced
+
