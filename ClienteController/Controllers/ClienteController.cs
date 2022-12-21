@@ -16,15 +16,8 @@ namespace ClienteController.Controllers
         {
             var usuario = new Cliente(cliente.Nome, cliente.DataNascimento, cliente.Email, cliente.Cpf);
 
-            //regras do negócio:
             if (!usuario.ValidacaoIdade())
                 return UnprocessableEntity("Menor de idade não cria conta");
-            if(!usuario.ValidacaoNome())
-                return UnprocessableEntity("O nome pode ter de 1 a 255 caracteres");
-            if (!usuario.ValidacaoEmail())
-                return UnprocessableEntity("O e-mail para ser válido precisa contem @ e .com");
-            if (!usuario.ValidacaoCpf())
-                return UnprocessableEntity("O cpf precisa conter 11 caracteres");
 
             clientes.Add(usuario);
             return Created("", usuario);
