@@ -11,8 +11,8 @@ namespace ClienteController.Controllers
     {
         public static List<Cliente> clientes = new List<Cliente>();
 
-        [HttpPost("Cadastrar")]
-        public IActionResult Cadastrar([FromBody] Cliente cliente)
+        [HttpPost("cadastrar")]
+        public ActionResult<Cliente> Cadastrar([FromBody] Cliente cliente)
         {
             var usuario = new Cliente(cliente.Nome, cliente.DataNascimento, cliente.Email, cliente.Cpf);
 
@@ -23,27 +23,28 @@ namespace ClienteController.Controllers
             return Created("", usuario);
         }
 
-        [HttpGet("Listar")]
-        public List<Cliente> Listar()
+        [HttpGet("listar")]
+        public IActionResult Listar()
         {
-            return clientes;
+            return Ok(clientes);
         }
 
-        [HttpGet("Buscar por CPF")]
-        public Cliente BuscaPorCpf(string cpf)
+        [HttpGet("busca-por-cpf/ {cpf}")]
+        public ActionResult<Cliente> BuscaPorCpf(string cpf)
         {
-            for(int i = 0; i < clientes.Count; i++)
+            Cliente clienteRetornar = null;
+            foreach (Cliente cliente in clientes)
             {
-                if(clientes[i].Cpf == cpf)
+                if(cliente.Cpf == cpf)
                 {
-                    return clientes[i];
+                    clienteRetornar = cliente;
                 }
             }
-            return null;
+            return Ok(clienteRetornar);
         }
 
-        [HttpPut("Alteração de Cadastro")]
-        public void AlteracaoDeCadastro(string cpf, [FromBody] Cliente cliente)
+        [HttpPut("alteracao-cadastro/ {cpf}")]
+        public ActionResult AlteracaoDeCadastro(string cpf, [FromBody] Cliente cliente)
         {
             for (int i = 0; i < clientes.Count; i++)
             {
@@ -55,10 +56,11 @@ namespace ClienteController.Controllers
                     clientes[i].DataNascimento = cliente.DataNascimento;
                 }
             }
+            return Accepted();
         }
 
-        [HttpDelete("Deletar Cadastro")]
-        public void Deletar(string cpf)
+        [HttpDelete("deletar-cadastro/ {cpf}")]
+        public ActionResult Deletar(string cpf)
         {
             for (int i = 0; i < clientes.Count; i++)
             {
@@ -67,6 +69,7 @@ namespace ClienteController.Controllers
                     clientes.Remove(clientes[i]);
                 }
             }
+            return Accepted();
         }
     }
 }

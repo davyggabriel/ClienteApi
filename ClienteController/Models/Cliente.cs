@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Reflection.Metadata.Ecma335;
 
 namespace ClienteController.Models
@@ -28,17 +29,22 @@ namespace ClienteController.Models
 
         public bool ValidacaoIdade()
         {
-            int anoAtual = DateTime.UtcNow.Year;
-            int mesAtual = DateTime.UtcNow.Month;
-            int diaAtual = DateTime.UtcNow.Day;
-            var calculo = (365 * anoAtual + 30 * mesAtual + diaAtual) - (365 * this.DataNascimento.Ano + 30 * this.DataNascimento.Mes + this.DataNascimento.Dia);
-            var idade = calculo / 365;
-               
+            //int anoAtual = DateTime.UtcNow.Year;
+            //int mesAtual = DateTime.UtcNow.Month;
+            //int diaAtual = DateTime.UtcNow.Day;
+            //var calculo = (365 * anoAtual + 30 * mesAtual + diaAtual) - (365 * this.DataNascimento.Ano + 30 * this.DataNascimento.Mes + this.DataNascimento.Dia);
+            //var idade = calculo / 365;
+
+            //if (idade >= 18)
+            //{
+            //    return true;
+            //}
+            //else return false;
+            int idade = DateTime.Now.Year - DataNascimento.Ano;
             if (idade >= 18)
-            {
                 return true;
-            }
-            else return false;
+
+            return false;
         }
     }
 }
